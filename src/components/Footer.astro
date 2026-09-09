@@ -1,0 +1,54 @@
+---
+import { Terminal, Github, Twitter, Linkedin, Heart } from 'lucide-astro';
+---
+
+<footer class="mt-20 border-t border-slate-200 dark:border-slate-800/80 bg-slate-50/50 dark:bg-[#060A12]/80 backdrop-blur-md transition-colors">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-2 space-y-4">
+        <a href="/" class="flex items-center gap-2 font-mono font-black text-lg text-slate-900 dark:text-white tracking-tight">
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+            <Terminal class="w-4 h-4" />
+          </div>
+          <span>DevStack<span class="text-emerald-500">Hub</span></span>
+        </a>
+        <p class="text-xs text-slate-600 dark:text-slate-400 max-w-sm leading-relaxed">
+          Production-tested infrastructure blueprints, cloud architecture playbooks, and systems engineering for high-scale teams.
+        </p>
+      </div>
+
+      <!-- Navigation Links -->
+      <div>
+        <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Navigation</h4>
+        <ul class="space-y-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+          <li><a href="/" class="hover:text-emerald-500 transition-colors">Home</a></li>
+          <li><a href="/about-us/" class="hover:text-emerald-500 transition-colors">About Us</a></li>
+          <li><a href="/contact-us/" class="hover:text-emerald-500 transition-colors">Contact Us</a></li>
+          <li><a href="/write-for-us/" class="hover:text-emerald-500 transition-colors">Write For Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal Links (Matching Exact WordPress URLs) -->
+      <div>
+        <h4 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Legal & Policy</h4>
+        <ul class="space-y-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+          <li><a href="/privacy-policy-2/" class="hover:text-emerald-500 transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms-of-service/" class="hover:text-emerald-500 transition-colors">Terms of Service</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright Strip -->
+    <div class="pt-8 border-t border-slate-200 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+      <p>© {new Date().getFullYear()} DevStackHub. All rights reserved.</p>
+      <div class="flex items-center gap-6">
+        <a href="/privacy-policy-2/" class="hover:text-emerald-400 transition-colors">Privacy</a>
+        <a href="/terms-of-service/" class="hover:text-emerald-400 transition-colors">Terms</a>
+        <a href="/contact-us/" class="hover:text-emerald-400 transition-colors">Support</a>
+      </div>
+    </div>
+  </div>
+</footer>

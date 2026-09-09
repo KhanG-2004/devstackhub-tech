@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { ArrowLeft, Mail, MessageSquare, Handshake, Clock, Globe } from 'lucide-astro';
+---
+
+<BaseLayout 
+  title="Contact Us — DevStackHub" 
+  description="Have a question, feedback on an article, or an inquiry regarding technical collaboration? Get in touch with the DevStackHub team."
+>
+  <Header />
+
+  <!-- Ambient Glow -->
+  <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-b from-emerald-500/15 via-teal-500/5 to-transparent blur-[140px] rounded-full"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.06]"></div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-28 relative z-10">
+    <!-- Back to Hub -->
+    <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors mb-8 group">
+      <ArrowLeft class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" /> Return to Architecture Hub
+    </a>
+
+    <!-- Page Header -->
+    <header class="pb-10 border-b border-slate-800/80">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
+        <Mail class="w-3.5 h-3.5" />
+        <span>DIRECT CHANNELS</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        Contact Us
+      </h1>
+      <p class="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed">
+        Have a question, feedback on an article, or an inquiry regarding technical collaboration? We’d love to hear from you.
+      </p>
+    </header>
+
+    <div class="mt-12 space-y-10">
+      <!-- How to Reach Us -->
+      <section>
+        <h2 class="text-xl font-bold text-white tracking-tight mb-6">
+          How to Reach Us
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- General Inquiries -->
+          <div class="p-6 rounded-2xl bg-[#090E1A]/80 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2.5 mb-3">
+                <MessageSquare class="w-5 h-5 text-emerald-400" />
+                <h3 class="text-sm sm:text-base font-bold text-white">General Inquiries & Feedback</h3>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                For editorial suggestions, corrections, or general questions about our guides, email us at:
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80">
+              <a 
+                href="mailto:contact@devstackhub.tech" 
+                class="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-emerald-400 hover:text-emerald-300 font-medium underline"
+              >
+                contact@devstackhub.tech
+              </a>
+            </div>
+          </div>
+
+          <!-- Technical Collaborations -->
+          <div class="p-6 rounded-2xl bg-[#090E1A]/80 border border-slate-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-2.5 mb-3">
+                <Handshake class="w-5 h-5 text-emerald-400" />
+                <h3 class="text-sm sm:text-base font-bold text-white">Technical Collaborations & Inquiries</h3>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                Interested in technical writing, code review requests, or business partnerships? Reach out directly via:
+              </p>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80">
+              <a 
+                href="mailto:support@devstackhub.tech" 
+                class="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-emerald-400 hover:text-emerald-300 font-medium underline"
+              >
+                support@devstackhub.tech
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Response Time -->
+      <section class="rounded-2xl bg-[#090E1A]/80 border border-slate-800 p-8">
+        <div class="flex items-center gap-2.5 mb-3">
+          <Clock class="w-5 h-5 text-emerald-400" />
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Response Time</h2>
+        </div>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          We aim to respond to all legitimate inquiries within 24 to 48 business hours. Please ensure your message includes a clear subject line and detailed context so we can route it to the right team member.
+        </p>
+      </section>
+
+      <!-- Location & Operations -->
+      <section class="rounded-2xl bg-gradient-to-r from-emerald-500/10 via-slate-900/80 to-[#090E1A] border border-emerald-500/30 p-8">
+        <div class="flex items-center gap-2.5 mb-3">
+          <Globe class="w-5 h-5 text-emerald-400" />
+          <h2 class="text-lg sm:text-xl font-bold text-white tracking-tight">Location & Operations</h2>
+        </div>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          DevStackHub operates digitally, supporting developers, cloud architects, and system administrators worldwide with actionable, production-ready engineering content.
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

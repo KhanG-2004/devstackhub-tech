@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { ArrowLeft, Edit3, CheckCircle2, Send, Cloud, Cpu, Layers, Terminal, Sparkles, Link2, FileText, Clock, Mail } from 'lucide-astro';
+---
+
+<BaseLayout 
+  title="Write for Us — DevStackHub" 
+  description="Contribute high-quality, practical technical guest posts, cloud deployment guides, and DevOps walkthroughs to DevStackHub."
+>
+  <Header />
+
+  <!-- Ambient Glow -->
+  <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-b from-emerald-500/15 via-teal-500/5 to-transparent blur-[140px] rounded-full"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.06]"></div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-28 relative z-10">
+    <!-- Back to Hub -->
+    <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors mb-8 group">
+      <ArrowLeft class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" /> Return to Architecture Hub
+    </a>
+
+    <!-- Page Header -->
+    <header class="pb-10 border-b border-slate-800/80">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
+        <Edit3 class="w-3.5 h-3.5" />
+        <span>CONTRIBUTION PLATFORM</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        Write for Us
+      </h1>
+      <p class="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed">
+        Welcome to DevStackHub! We welcome technical writers, DevOps engineers, software developers, and cloud architects interested in contributing high-quality, practical guest posts to our platform.
+      </p>
+    </header>
+
+    <div class="mt-12 space-y-12">
+      <!-- Why Write for DevStackHub -->
+      <section>
+        <h2 class="text-xl font-bold text-white tracking-tight mb-5 flex items-center gap-2">
+          Why Write for DevStackHub?
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-5 rounded-xl bg-[#090E1A]/80 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-3">
+              <Sparkles class="w-4 h-4" />
+            </div>
+            <h3 class="text-sm font-bold text-white mb-2">High-Intent Audience</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Reach engineers, architects, and sysadmins exploring cloud infrastructure, web engineering, and modern DevOps tools.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-[#090E1A]/80 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-3">
+              <Link2 class="w-4 h-4" />
+            </div>
+            <h3 class="text-sm font-bold text-white mb-2">Quality Attribution</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Quality backlinks and author attribution to establish your authority and thought leadership in the technical ecosystem.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-[#090E1A]/80 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-3">
+              <Clock class="w-4 h-4" />
+            </div>
+            <h3 class="text-sm font-bold text-white mb-2">Permanent Indexation</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Clean, fast-loading, mobile-optimized edge reading experience with durable, long-term search engine indexation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Topics We Accept -->
+      <section>
+        <h2 class="text-xl font-bold text-white tracking-tight mb-2">
+          Topics We Accept
+        </h2>
+        <p class="text-sm text-slate-400 mb-6">
+          We focus on actionable, real-world technical guides. Popular categories include:
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="flex items-center gap-2.5 mb-2">
+              <Cloud class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">Cloud Infrastructure</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Azure, AWS, GCP deployment, serverless architecture, and cloud security postures.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="flex items-center gap-2.5 mb-2">
+              <Cpu class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">DevOps & CI/CD</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Docker, Kubernetes, GitHub Actions, automation workflows, and containerization.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="flex items-center gap-2.5 mb-2">
+              <Layers class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">Web Development</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Modern frontend and backend engineering, API development, and database tuning.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="flex items-center gap-2.5 mb-2">
+              <Terminal class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">System Administration</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Linux server optimization, DNS management, and SSL/TLS edge configurations.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Editorial & Submission Guidelines -->
+      <section class="rounded-2xl bg-[#090E1A]/80 border border-slate-800 p-8">
+        <h2 class="text-xl font-bold text-white tracking-tight mb-3">
+          Editorial & Submission Guidelines
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mb-6">
+          To maintain quality standards for our readers and search engines, ensure your draft meets the following criteria:
+        </p>
+
+        <ol class="space-y-4 text-sm text-slate-300">
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <div>
+              <strong class="text-white">Originality:</strong> Submissions must be 100% unique, original, and not published elsewhere.
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <div>
+              <strong class="text-white">Depth:</strong> Minimum 1,000+ words with practical examples, clear code snippets, or configuration walkthroughs.
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs flex items-center justify-center shrink-0 mt-0.5">3</span>
+            <div>
+              <strong class="text-white">Structure:</strong> Well-organized with H2/H3 subheadings, bullet points, and high-resolution architecture diagrams or screenshots.
+            </div>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs flex items-center justify-center shrink-0 mt-0.5">4</span>
+            <div>
+              <strong class="text-white">Links:</strong> Max 1–2 relevant, contextual do-follow links to non-competing, authoritative resources.
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- How to Submit Your Pitch -->
+      <section class="rounded-2xl bg-gradient-to-r from-emerald-500/10 via-slate-900/80 to-[#090E1A] border border-emerald-500/30 p-8">
+        <div class="flex items-center gap-2.5 mb-3">
+          <Send class="w-5 h-5 text-emerald-400" />
+          <h2 class="text-xl font-bold text-white tracking-tight">How to Submit Your Pitch</h2>
+        </div>
+        
+        <p class="text-sm text-slate-300 leading-relaxed mb-5">
+          To pitch an article topic or submit a draft for review, contact our editorial team:
+        </p>
+
+        <div class="space-y-2.5 font-mono text-xs sm:text-sm mb-6 bg-slate-950/80 border border-slate-800 p-4 rounded-xl">
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+            <span class="text-slate-400">• Email:</span>
+            <span class="text-emerald-400 font-semibold">
+              <a href="mailto:guestpost@devstackhub.tech" class="underline hover:text-emerald-300">guestpost@devstackhub.tech</a>
+              <span class="text-slate-400 font-normal"> (or </span>
+              <a href="mailto:contact@devstackhub.tech" class="underline hover:text-emerald-300 text-slate-300 font-normal">contact@devstackhub.tech</a>
+              <span class="text-slate-400 font-normal">)</span>
+            </span>
+          </div>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+            <span class="text-slate-400">• Subject Line:</span>
+            <span class="text-emerald-300 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 w-fit">Guest Post Pitch: [Your Proposed Article Title]</span>
+          </div>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+          Please include a short summary of your background, your proposed outline or draft link (Google Docs), and sample links you plan to reference. We review submissions within <strong>24 to 48 hours</strong>.
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "DevStackHub — Cloud Architecture & High-Performance Engineering", 
+  description = "Production-grade cloud architecture blueprints, DevOps pipelines, and Linux sysadmin playbooks." 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Theme Initialization Script (Prevents flash of wrong theme) -->
+    <script is:inline>
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'light') {
+        document.documentElement.classList.remove('dark');
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900 dark:bg-[#060911] dark:text-slate-100 min-h-screen font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
+    <slot />
+  </body>
+</html>

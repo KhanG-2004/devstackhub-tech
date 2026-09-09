@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import { ArrowLeft, Terminal, Cloud, Layers, Cpu, Wrench, ShieldCheck, Mail } from 'lucide-astro';
+---
+
+<BaseLayout 
+  title="About Us — DevStackHub" 
+  description="DevStackHub delivers practical, production-ready engineering insights, cloud deployment guides, and modern software development practices."
+>
+  <Header />
+
+  <!-- Ambient Glow -->
+  <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-gradient-to-b from-emerald-500/15 via-teal-500/5 to-transparent blur-[140px] rounded-full"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.06]"></div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-28 relative z-10">
+    <!-- Back to Hub -->
+    <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors mb-8 group">
+      <ArrowLeft class="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" /> Return to Architecture Hub
+    </a>
+
+    <!-- Page Title & Lead -->
+    <header class="pb-10 border-b border-slate-800/80">
+      <h1 class="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+        About Us
+      </h1>
+      <p class="mt-6 text-base sm:text-lg text-slate-300 leading-relaxed">
+        Welcome to <strong class="text-white font-semibold">DevStackHub</strong>, a dedicated platform delivering practical, production-ready engineering insights, cloud deployment guides, and modern software development practices.
+      </p>
+    </header>
+
+    <div class="mt-12 space-y-12">
+      <!-- Our Mission Section -->
+      <section class="rounded-2xl bg-[#090E1A]/80 border border-slate-800 p-8">
+        <div class="flex items-center gap-2.5 mb-3">
+          <Terminal class="w-5 h-5 text-emerald-400" />
+          <h2 class="text-xl font-bold text-white tracking-tight">Our Mission</h2>
+        </div>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          At DevStackHub, our goal is to simplify complex infrastructure and software engineering workflows. Whether you are deploying scalable web applications, configuring cloud architecture, automating CI/CD pipelines, or optimizing system administration tasks, we focus on clear, actionable tutorials without unnecessary fluff.
+        </p>
+      </section>
+
+      <!-- What We Cover Section -->
+      <section>
+        <h2 class="text-xl font-bold text-white tracking-tight mb-6 flex items-center gap-2">
+          What We Cover
+        </h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <Cloud class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">Cloud Computing & Infrastructure</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Best practices for deploying, securing, and scaling applications on modern cloud providers (Azure, AWS, GCP).
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <Layers class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">Web Engineering & Architecture</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Modern full-stack development patterns, performance tuning, database optimization, and framework guides.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <Cpu class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">DevOps & Automation</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Containerization with Docker/Kubernetes, continuous integration workflows, server management, and system security.
+            </p>
+          </div>
+
+          <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/40 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <Wrench class="w-4 h-4 text-emerald-400" />
+              <h3 class="text-sm font-bold text-white">Developer Tools & Tutorials</h3>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              In-depth breakdowns of tooling, developer productivity, and real-world system implementations.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Editorial Standards Section -->
+      <section class="rounded-2xl bg-[#090E1A]/80 border border-slate-800 p-8">
+        <div class="flex items-center gap-2.5 mb-3">
+          <ShieldCheck class="w-5 h-5 text-emerald-400" />
+          <h2 class="text-xl font-bold text-white tracking-tight">Editorial Standards & Transparency</h2>
+        </div>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          Every guide and breakdown on DevStackHub is crafted with accuracy, reliability, and real-world applicability in mind. We build and test our guides directly on modern stacks so developers, sysadmins, and students can deploy solutions seamlessly.
+        </p>
+      </section>
+
+      <!-- Get in Touch Section -->
+      <section class="rounded-2xl bg-gradient-to-r from-emerald-500/10 via-slate-900/80 to-[#090E1A] border border-emerald-500/30 p-8">
+        <div class="flex items-center gap-2.5 mb-3">
+          <Mail class="w-5 h-5 text-emerald-400" />
+          <h2 class="text-xl font-bold text-white tracking-tight">Get in Touch</h2>
+        </div>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+          Have a question, feedback, or a technical inquiry? Reach out directly via our 
+          <a href="/contact-us/" class="text-emerald-400 underline hover:text-emerald-300 font-medium">Contact page</a> 
+          or email us at 
+          <a href="mailto:contact@devstackhub.tech" class="text-emerald-400 font-mono underline hover:text-emerald-300 ml-1">
+            contact@devstackhub.tech
+          </a>.
+        </p>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

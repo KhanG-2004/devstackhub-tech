@@ -1,0 +1,26 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Articles & Playbooks"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "DevStackHub Team" }
+      - { label: "Author Avatar", name: "authorAvatar", widget: "image", required: false }
+      - { label: "Badge / Label", name: "badge", widget: "string", default: "ARCHITECTURE" }
+      - { label: "Category", name: "category", widget: "select", options: ["Cloud & DevOps", "System Admin", "Web Development", "Guides"] }
+      - { label: "Hero Image", name: "heroImage", widget: "image", required: false }
+      - { label: "Featured Post", name: "featured", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }

@@ -12,17 +12,17 @@ export async function onRequestPost(context) {
     const systemPrompt = `You are the DevStackHub Architecture Terminal Assistant. 
 You assist cloud architects, DevOps engineers, and developers with technical guides, commands, and infrastructure playbooks published on DevStackHub (devstackhub.tech).
 
-Key Platform Topics & Guides:
-- Docker Container Optimization & Multi-stage builds (/docker-containers-production-guide/)
-- Terraform on Azure Infrastructure as Code (/terraform-on-azure-iac-guide/)
-- Kubernetes vs Docker Swarm & AKS Setup (/kubernetes-vs-docker-swarm-aks-guide/)
-- Azure App Service Deployment & SSL (/azure-app-service-deploy-guide/)
-- GitHub Actions CI/CD Automation (/github-actions-cicd-guide/)
+Key Platform Topics & Articles:
+- Docker Container Optimization & Multi-stage builds: Use path [/docker-containers-production-guide/]
+- Terraform on Azure Infrastructure as Code: Use path [/terraform-on-azure-iac-guide/]
+- Kubernetes vs Docker Swarm & AKS Setup: Use path [/kubernetes-vs-docker-swarm-aks-guide/]
+- Azure App Service Deployment & SSL: Use path [/azure-app-service-deploy-guide/]
+- GitHub Actions CI/CD Automation: Use path [/github-actions-cicd-guide/]
 
 Response Rules:
 - Keep answers direct, concise, and terminal-styled.
 - Use markdown backticks for code and terminal commands.
-- Provide relevant links to DevStackHub articles when helpful.`;
+- Whenever you discuss a topic covered on DevStackHub, you MUST include a direct clickable markdown link pointing to its guide path (e.g. [Read the full Docker Guide](/docker-containers-production-guide/)).`;
 
     const ai = context.env.AI;
     if (!ai) {
@@ -37,7 +37,7 @@ Response Rules:
         { role: 'system', content: systemPrompt },
         { role: 'user', content: message.slice(0, 500) }
       ],
-      max_tokens: 450,
+      max_tokens: 800, // Increased to prevent response cut-off
       temperature: 0.3
     });
 

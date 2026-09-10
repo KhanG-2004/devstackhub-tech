@@ -108,6 +108,18 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
       }
     }
 
+    // Global click listener to bypass browser injection blocks and open links cleanly
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('.ai-terminal-link');
+      if (target) {
+        e.preventDefault();
+        const url = target.getAttribute('data-url');
+        if (url) {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        }
+      }
+    });
+
     function toggleChat() {
       if (!chatWindow) return;
       const isHidden = chatWindow.classList.contains('hidden');
@@ -219,15 +231,15 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
         .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        // Safe markdown link handler preserving exact original URLs and slugs
+        // Render markdown links as safe clickable spans preserving exact original slugs
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
           if (!url) return text;
-          return `<a href="${url}" class="text-emerald-500 underline hover:text-emerald-400 font-semibold" target="_blank" rel="noopener noreferrer">${text}</a>`;
+          return `<span class="ai-terminal-link text-emerald-500 underline hover:text-emerald-400 font-semibold cursor-pointer" data-url="${url}">${text}</span>`;
         });
 
-      // Auto-detect raw paths preserving exact slugs for SEO safety
+      // Auto-detect raw paths preserving exact SEO slugs
       html = html.replace(/(\/[a-z0-9\-_]+\/)/g, (match, path) => {
-        return `<a href="${path}" class="text-emerald-500 font-semibold underline hover:text-emerald-400" target="_blank" rel="noopener noreferrer">${path}</a>`;
+        return `<span class="ai-terminal-link text-emerald-500 font-semibold underline hover:text-emerald-400 cursor-pointer" data-url="${path}">${path}</span>`;
       });
 
       return html;

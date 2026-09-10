@@ -32,12 +32,79 @@ const getImageUrl = (img?: string) => {
 };
 
 const coverImg = getImageUrl(post.data.coverImage);
+const canonicalUrl = `https://devstackhub.tech/${post.id}/`;
+
+// Structured Data Schemas
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "image": coverImg ? [coverImg] : ["https://devstackhub.tech/icon.png"],
+  "datePublished": new Date(post.data.pubDate).toISOString(),
+  "dateModified": new Date(post.data.pubDate).toISOString(),
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  },
+  "author": {
+    "@type": "Person",
+    "name": post.data.author || "Farraz Ahmed",
+    "url": "https://devstackhub.tech/about-us/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "DevStackHub",
+    "url": "https://devstackhub.tech",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://devstackhub.tech/icon.png"
+    }
+  }
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://devstackhub.tech"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": post.data.category || "Articles",
+      "item": `https://devstackhub.tech/`
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": post.data.title,
+      "item": canonicalUrl
+    }
+  ]
+};
 ---
 
 <BaseLayout 
   title={`${post.data.seoTitle || post.data.title} — DevStackHub`}
   description={post.data.description}
 >
+  <!-- Scroll Reading Progress Indicator -->
+  <div class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[200] pointer-events-none">
+    <div 
+      id="reading-progress-bar" 
+      class="h-full w-0 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 shadow-[0_0_12px_rgba(16,185,129,0.7)] transition-[width] duration-75 ease-out"
+    ></div>
+  </div>
+
+  <!-- Inject JSON-LD Rich Snippet Schemas -->
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
   <Header />
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24">
@@ -87,16 +154,16 @@ const coverImg = getImageUrl(post.data.coverImage);
       </div>
     </header>
 
-    <!-- Header Cover Image -->
+    <!-- Header Cover Image (Zero white margins/gaps) -->
     {coverImg && (
-      <div class="max-w-4xl mx-auto mb-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-slate-100 dark:bg-slate-900">
-        <img src={coverImg} alt={post.data.title} class="w-full h-auto max-h-[520px] object-cover" />
+      <div class="max-w-4xl mx-auto mb-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-transparent flex">
+        <img src={coverImg} alt={post.data.title} class="w-full h-auto max-h-[520px] object-cover block m-0 p-0" />
       </div>
     )}
 
     <!-- Main Content & Sidebar Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
-      <article class="lg:col-span-8 article-body" id="article-content">
+      <article class="lg:col-span-8 article-body text-slate-700 dark:text-slate-300" id="article-content">
         <Content />
       </article>
 
@@ -259,6 +326,28 @@ const coverImg = getImageUrl(post.data.coverImage);
 </BaseLayout>
 
 <script>
+  // Reading Progress Bar Tracker
+  const progressBar = document.getElementById('reading-progress-bar');
+  const contentEl = document.getElementById('article-content');
+
+  function updateReadingProgress() {
+    if (!progressBar || !contentEl) return;
+
+    const totalHeight = contentEl.clientHeight;
+    const contentTop = contentEl.offsetTop;
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+
+    const distance = scrollY - contentTop + (windowHeight / 2);
+    const progress = Math.min(Math.max((distance / totalHeight) * 100, 0), 100);
+
+    progressBar.style.width = `${progress}%`;
+  }
+
+  window.addEventListener('scroll', updateReadingProgress, { passive: true });
+  window.addEventListener('resize', updateReadingProgress);
+  updateReadingProgress();
+
   // Lightbox Modal Logic
   const trigger = document.getElementById('avatar-trigger');
   const modal = document.getElementById('photo-modal');
@@ -366,7 +455,6 @@ const coverImg = getImageUrl(post.data.coverImage);
         }
       }
 
-      // If class didn't have it, check data attribute or inner content signatures
       if (detectedLang === 'CODE') {
         const textSample = pre.textContent || '';
         if (textSample.includes('npm ') || textSample.includes('docker ') || textSample.includes('kubectl ') || textSample.includes('git ')) {
@@ -404,7 +492,6 @@ const coverImg = getImageUrl(post.data.coverImage);
       topBar.appendChild(titleSpan);
       topBar.appendChild(copyBtn);
 
-      // Extract raw text lines and safely build structured line numbers
       const rawText = codeEl.innerText || codeEl.textContent || '';
       const lines = rawText.split('\n');
       
@@ -436,7 +523,6 @@ const coverImg = getImageUrl(post.data.coverImage);
       formattedContainer.appendChild(lineNumbersCol);
       formattedContainer.appendChild(codeLinesCol);
 
-      // Clear original content and inject professional layout
       pre.innerHTML = '';
       pre.className = 'm-0 p-0 bg-transparent border-0 overflow-hidden';
       pre.appendChild(formattedContainer);
@@ -458,14 +544,20 @@ const coverImg = getImageUrl(post.data.coverImage);
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), inset 0 0 15px rgba(16, 185, 129, 0.05);
   }
 
-  /* Adaptive Typography Styling for WordPress HTML in Light and Dark Mode */
-  .article-body { color: #334155; font-size: 1.05rem; line-height: 1.8; }
-  :global(.dark) .article-body { color: #cbd5e1; }
+  /* High Contrast Typography for Article Content in Both Modes */
+  .article-body { font-size: 1.05rem; line-height: 1.8; }
+  
+  /* Light Mode Paragraphs & Text */
+  html:not(.dark) .article-body { color: #334155; }
+  html:not(.dark) .article-body p { color: #334155; margin-bottom: 1.5rem; }
+  
+  /* Dark Mode Paragraphs & Text (Crisp Light Slate) */
+  html.dark .article-body { color: #cbd5e1; }
+  html.dark .article-body p { color: #cbd5e1; margin-bottom: 1.5rem; }
 
-  .article-body p { margin-bottom: 1.5rem; }
-
-  .article-body h2 { 
-    color: #0f172a; 
+  /* Headings: Jet-black in Light Mode, Pure Bright White in Dark Mode */
+  html:not(.dark) .article-body h2 { 
+    color: #0f172a !important; 
     font-size: 1.75rem; 
     font-weight: 800; 
     letter-spacing: -0.025em; 
@@ -475,36 +567,50 @@ const coverImg = getImageUrl(post.data.coverImage);
     border-bottom: 1px solid rgba(203, 213, 225, 0.6); 
     scroll-margin-top: 6rem; 
   }
-  :global(.dark) .article-body h2 { 
-    color: #ffffff; 
-    border-bottom-color: rgba(51, 65, 85, 0.4); 
+  html.dark .article-body h2 { 
+    color: #ffffff !important; 
+    font-size: 1.75rem; 
+    font-weight: 800; 
+    letter-spacing: -0.025em; 
+    margin-top: 2.75rem; 
+    margin-bottom: 1.25rem; 
+    padding-bottom: 0.5rem; 
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5); 
+    scroll-margin-top: 6rem; 
   }
 
-  .article-body h3 { 
-    color: #1e293b; 
+  html:not(.dark) .article-body h3 { 
+    color: #1e293b !important; 
     font-size: 1.35rem; 
     font-weight: 700; 
     margin-top: 2.25rem; 
     margin-bottom: 1.0rem; 
     scroll-margin-top: 6rem; 
   }
-  :global(.dark) .article-body h3 { color: #f1f5f9; }
+  html.dark .article-body h3 { 
+    color: #f8fafc !important; 
+    font-size: 1.35rem; 
+    font-weight: 700; 
+    margin-top: 2.25rem; 
+    margin-bottom: 1.0rem; 
+    scroll-margin-top: 6rem; 
+  }
 
   .article-body ul { list-style-type: disc; padding-left: 1.75rem; margin-bottom: 1.75rem; }
   .article-body ol { list-style-type: decimal; padding-left: 1.75rem; margin-bottom: 1.75rem; }
   .article-body li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
 
-  .article-body strong { color: #0f172a; font-weight: 700; }
-  :global(.dark) .article-body strong { color: #ffffff; }
+  html:not(.dark) .article-body strong { color: #0f172a; font-weight: 700; }
+  html.dark .article-body strong { color: #ffffff; font-weight: 700; }
 
-  .article-body a { color: #059669; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; transition: color 0.2s; }
-  :global(.dark) .article-body a { color: #34d399; }
-  .article-body a:hover { color: #10b981; }
-  :global(.dark) .article-body a:hover { color: #6ee7b7; }
+  html:not(.dark) .article-body a { color: #059669; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; }
+  html.dark .article-body a { color: #34d399; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; }
+  html:not(.dark) .article-body a:hover { color: #10b981; }
+  html.dark .article-body a:hover { color: #6ee7b7; }
 
   .article-body code { background-color: transparent; color: inherit; padding: 0; border-radius: 0; }
   
-  .article-body blockquote { 
+  html:not(.dark) .article-body blockquote { 
     border-left: 4px solid #10b981; 
     padding-left: 1.25rem; 
     font-style: italic; 
@@ -512,9 +618,16 @@ const coverImg = getImageUrl(post.data.coverImage);
     margin-top: 1.75rem; 
     margin-bottom: 1.75rem; 
   }
-  :global(.dark) .article-body blockquote { color: #94a3b8; }
+  html.dark .article-body blockquote { 
+    border-left: 4px solid #10b981; 
+    padding-left: 1.25rem; 
+    font-style: italic; 
+    color: #94a3b8; 
+    margin-top: 1.75rem; 
+    margin-bottom: 1.75rem; 
+  }
   
-  /* In-Article Images & Figures */
+  /* In-Article Images & WordPress Figure Fix: eliminates phantom white background borders */
   .article-body figure, .article-body img { 
     border-radius: 1rem; 
     margin-top: 2rem; 
@@ -522,14 +635,16 @@ const coverImg = getImageUrl(post.data.coverImage);
     width: 100%; 
     max-height: 540px;
     object-fit: cover;
-    border: 1px solid #e2e8f0; 
-    background-color: #f8fafc;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background-color: transparent !important;
+    display: block;
   }
-  :global(.dark) .article-body figure, :global(.dark) .article-body img { 
-    border-color: #1e293b; 
-    background-color: #090E1A; 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+  html:not(.dark) .article-body figure, html:not(.dark) .article-body img {
+    border: 1px solid #e2e8f0; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  }
+  html.dark .article-body figure, html.dark .article-body img {
+    border: 1px solid #1e293b; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
   }
 
   .article-body figcaption { 
@@ -539,5 +654,5 @@ const coverImg = getImageUrl(post.data.coverImage);
     text-align: center; 
     margin-top: 0.5rem; 
   }
-  :global(.dark) .article-body figcaption { color: #64748b; }
+  html.dark .article-body figcaption { color: #64748b; }
 </style>

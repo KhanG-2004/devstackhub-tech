@@ -217,15 +217,15 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
         .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        // Force markdown links to open in a new tab securely with absolute domain fallback
+        // Clean relative markdown links opening safely in new tabs
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-          const absoluteUrl = url.startsWith('http') ? url : `https://devstackhub.tech${url.startsWith('/') ? '' : '/'}${url}`;
-          return `<a href="${absoluteUrl}" class="text-emerald-500 underline hover:text-emerald-400 font-semibold" target="_blank" rel="noopener noreferrer">${text}</a>`;
+          const cleanUrl = url.startsWith('http') ? url : (url.startsWith('/') ? url : '/' + url);
+          return `<a href="${cleanUrl}" class="text-emerald-500 underline hover:text-emerald-400 font-semibold" target="_blank" rel="noopener noreferrer">${text}</a>`;
         });
 
-      // Force auto-detected paths into absolute new-tab links
+      // Auto-detect raw paths and turn them into safe relative links
       html = html.replace(/(\/[a-z0-9\-_]+\/)/g, (match, path) => {
-        return `<a href="https://devstackhub.tech${path}" class="text-emerald-500 font-semibold underline hover:text-emerald-400" target="_blank" rel="noopener noreferrer">${path}</a>`;
+        return `<a href="${path}" class="text-emerald-500 font-semibold underline hover:text-emerald-400" target="_blank" rel="noopener noreferrer">${path}</a>`;
       });
 
       return html;

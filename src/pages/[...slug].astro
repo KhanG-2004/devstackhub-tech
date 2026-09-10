@@ -43,7 +43,7 @@ const coverImg = getImageUrl(post.data.coverImage);
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-24">
     <!-- Breadcrumb Return -->
     <div class="mb-8">
-      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-400 hover:text-emerald-300 transition-colors">
+      <a href="/" class="inline-flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-colors">
         <ArrowLeft class="w-3.5 h-3.5" />
         Return to Knowledge Base
       </a>
@@ -51,20 +51,20 @@ const coverImg = getImageUrl(post.data.coverImage);
 
     <!-- Article Header -->
     <header class="max-w-4xl mx-auto text-center mb-12">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-6">
         <span>{post.data.category}</span>
         <span>•</span>
         <span>{post.data.badge}</span>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-[1.15] mb-8">
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.15] mb-8">
         {post.data.title}
       </h1>
 
       <!-- Byline Avatar with Full Hair Visible -->
-      <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-400 py-3 border-y border-slate-800/80">
+      <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-slate-600 dark:text-slate-400 py-3 border-y border-slate-200 dark:border-slate-800/80">
         <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500/40 shrink-0 bg-slate-900 relative">
+          <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500/40 shrink-0 bg-slate-100 dark:bg-slate-900 relative">
             <Image 
               src={authorAvatar} 
               alt={post.data.author} 
@@ -72,16 +72,16 @@ const coverImg = getImageUrl(post.data.coverImage);
               style="transform: scale(1.3) translateY(2.5%); transform-origin: 50% 26%;"
             />
           </div>
-          <span class="text-slate-200 font-semibold">{post.data.author}</span>
+          <span class="text-slate-900 dark:text-slate-200 font-semibold">{post.data.author}</span>
         </div>
-        <span class="hidden sm:inline text-slate-700">•</span>
+        <span class="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
         <span class="flex items-center gap-1.5">
-          <Calendar class="w-3.5 h-3.5 text-emerald-400" />
+          <Calendar class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
           {formattedDate}
         </span>
-        <span class="hidden sm:inline text-slate-700">•</span>
+        <span class="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
         <span class="flex items-center gap-1.5">
-          <Clock class="w-3.5 h-3.5 text-emerald-400" />
+          <Clock class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
           {post.data.readTime}
         </span>
       </div>
@@ -89,7 +89,7 @@ const coverImg = getImageUrl(post.data.coverImage);
 
     <!-- Header Cover Image -->
     {coverImg && (
-      <div class="max-w-4xl mx-auto mb-14 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900">
+      <div class="max-w-4xl mx-auto mb-14 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl bg-slate-100 dark:bg-slate-900">
         <img src={coverImg} alt={post.data.title} class="w-full h-auto max-h-[520px] object-cover" />
       </div>
     )}
@@ -105,30 +105,30 @@ const coverImg = getImageUrl(post.data.coverImage);
         <div class="sticky top-28 space-y-6">
           
           <!-- Table of Contents -->
-          <div class="p-6 rounded-2xl bg-[#090E1A] border border-slate-800" id="toc-container">
-            <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-800 text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">
+          <div class="p-6 rounded-2xl bg-white dark:bg-[#090E1A] border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none" id="toc-container">
+            <div class="flex items-center gap-2 pb-3 mb-4 border-b border-slate-200 dark:border-slate-800 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider">
               <BookOpen class="w-4 h-4" />
               Table of Contents
             </div>
             <nav class="space-y-2 text-xs font-mono max-h-[50vh] overflow-y-auto pr-2" id="toc-nav">
               {headings && headings.length > 0 ? (
                 headings.map((h) => (
-                  <a href={`#${h.slug}`} class={`block text-slate-400 hover:text-emerald-400 transition-colors leading-relaxed ${h.depth === 3 ? 'pl-4 text-slate-500' : 'font-semibold'}`}>
+                  <a href={`#${h.slug}`} class={`block text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors leading-relaxed ${h.depth === 3 ? 'pl-4 text-slate-500' : 'font-semibold'}`}>
                     {h.text}
                   </a>
                 ))
               ) : (
-                <div class="text-slate-500 italic text-[11px]" id="toc-loading">Analyzing article headings...</div>
+                <div class="text-slate-400 dark:text-slate-500 italic text-[11px]" id="toc-loading">Analyzing article headings...</div>
               )}
             </nav>
           </div>
 
           <!-- DevStackHub Architecture Rail Box -->
-          <div class="p-6 rounded-2xl bg-[#070D18] border border-slate-800/80 shadow-lg">
-            <h4 class="text-xs font-mono font-bold text-emerald-400 tracking-wider mb-3">
+          <div class="p-6 rounded-2xl bg-white dark:bg-[#070D18] border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-lg">
+            <h4 class="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 tracking-wider mb-3">
               DevStackHub Architecture Rail
             </h4>
-            <p class="text-xs font-mono text-slate-400 leading-relaxed">
+            <p class="text-xs font-mono text-slate-600 dark:text-slate-400 leading-relaxed">
               Verified against production edge deployment configs with automated zero-trust inspection.
             </p>
           </div>
@@ -137,52 +137,12 @@ const coverImg = getImageUrl(post.data.coverImage);
       </aside>
     </div>
 
-    <!-- Weekly Architecture Dispatch Newsletter Card -->
-    <section class="max-w-4xl mx-auto mt-24 neon-card-hover rounded-3xl bg-[#090E1A]/95 border border-slate-800/80 p-8 sm:p-14 text-center relative overflow-hidden transition-all duration-300">
-      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="relative z-10 max-w-2xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-mono font-bold tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 uppercase mb-6 shadow-sm">
-          <Radio class="w-3 h-3 text-emerald-400 animate-pulse" />
-          Weekly Architecture Telemetry
-        </div>
-
-        <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-snug">
-          Join 2,500+ Engineers Receiving Our <br class="hidden sm:inline" />
-          <span class="text-emerald-400">Weekly Dispatch</span>
-        </h2>
-
-        <p class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed font-sans max-w-xl mx-auto">
-          Zero marketing fluff. Strictly production-grade Kubernetes manifests, Linux kernel tuning scripts, and high-scale edge delivery post-mortems delivered every Thursday.
-        </p>
-
-        <form class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Subscribed to Weekly Dispatch!');">
-          <div class="relative w-full">
-            <Mail class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-            <input 
-              type="email" 
-              required 
-              placeholder="architect@domain.com" 
-              class="w-full pl-10 pr-4 py-3 bg-[#040810] border border-slate-800 rounded-xl text-xs font-mono text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
-            />
-          </div>
-          <button 
-            type="submit" 
-            class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all shrink-0 active:scale-95"
-          >
-            <span>Subscribe</span>
-            <Send class="w-3.5 h-3.5" />
-          </button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Author Card with Full Hair & Downward Alignment -->
-    <div class="max-w-4xl mx-auto mt-10 p-6 sm:p-8 rounded-3xl neon-card-hover bg-[#070D18] border border-slate-800/80 flex flex-col sm:flex-row gap-6 items-start transition-all duration-300">
+    <!-- Author Card (Moved Above Newsletter) -->
+    <div class="max-w-4xl mx-auto mt-20 p-6 sm:p-8 rounded-3xl neon-card-hover bg-white dark:bg-[#070D18] border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none flex flex-col sm:flex-row gap-6 items-start transition-all duration-300">
       
       <!-- Clickable Photo Container: Seamless Edge, Full Hair & Face Focus -->
       <div class="relative shrink-0 group/avatar cursor-pointer" id="avatar-trigger" title="Click to view photo">
-        <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-emerald-400 shadow-md bg-[#070D18] relative">
+        <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden border-2 border-emerald-500 dark:border-emerald-400 shadow-md bg-slate-100 dark:bg-[#070D18] relative">
           <Image 
             src={authorAvatar} 
             alt="Farraz Ahmed" 
@@ -190,41 +150,81 @@ const coverImg = getImageUrl(post.data.coverImage);
             style="transform: scale(1.3) translateY(2.5%); transform-origin: 50% 26%;"
           />
         </div>
-        <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-400 border-4 border-[#070D18] rounded-full"></div>
+        <div class="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 dark:bg-emerald-400 border-4 border-white dark:border-[#070D18] rounded-full"></div>
       </div>
       
       <div class="flex-1 flex flex-col justify-between w-full">
         <div>
           <div class="flex flex-wrap items-center gap-3 mb-2">
-            <h3 class="text-2xl font-black text-white leading-none">Farraz Ahmed</h3>
-            <span class="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold text-emerald-400 border border-emerald-400/30 bg-emerald-400/10 tracking-wide uppercase">
+            <h3 class="text-2xl font-black text-slate-900 dark:text-white leading-none">Farraz Ahmed</h3>
+            <span class="px-2.5 py-0.5 rounded-md text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 dark:border-emerald-400/30 bg-emerald-500/10 dark:bg-emerald-400/10 tracking-wide uppercase">
               Systems & Cloud Architect
             </span>
           </div>
-          <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mt-2 font-sans">
+          <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mt-2 font-sans">
             Computer Science engineer focused on distributed cloud runtimes, Linux kernel optimization, zero-trust network meshes, and edge-native architectures.
           </p>
         </div>
         
-        <div class="flex flex-wrap items-center justify-between mt-6 pt-4 border-t border-slate-800/80 gap-4">
+        <div class="flex flex-wrap items-center justify-between mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/80 gap-4">
           <div class="flex items-center gap-2">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-[#0E1526] hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-emerald-400 transition-colors">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-slate-100 dark:bg-[#0E1526] hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
               <Github class="w-4 h-4" />
             </a>
-            <a href="https://dev.to" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-[#0E1526] hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-mono font-medium hover:text-emerald-400 transition-colors">
+            <a href="https://dev.to" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0E1526] hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono font-medium hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
               DEV.to
             </a>
-            <a href="https://hashnode.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-[#0E1526] hover:bg-slate-800 border border-slate-800 text-slate-300 text-xs font-mono font-medium hover:text-emerald-400 transition-colors">
+            <a href="https://hashnode.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-[#0E1526] hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-mono font-medium hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
               Hashnode
             </a>
           </div>
-          <div class="flex items-center gap-1.5 text-xs font-mono text-emerald-400 font-medium">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div class="flex items-center gap-1.5 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse"></span>
             Verified Lead Architect
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Weekly Architecture Dispatch Newsletter Card -->
+    <section class="max-w-4xl mx-auto mt-12 neon-card-hover rounded-3xl bg-white dark:bg-[#090E1A]/95 border border-slate-200 dark:border-slate-800/80 p-8 sm:p-14 text-center relative overflow-hidden transition-all duration-300 shadow-sm dark:shadow-none">
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-2xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-mono font-bold tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 uppercase mb-6 shadow-sm">
+          <Radio class="w-3 h-3 text-emerald-600 dark:text-emerald-400 animate-pulse" />
+          Weekly Architecture Telemetry
+        </div>
+
+        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
+          Join 2,500+ Engineers Receiving Our <br class="hidden sm:inline" />
+          <span class="text-emerald-600 dark:text-emerald-400">Weekly Dispatch</span>
+        </h2>
+
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-4 leading-relaxed font-sans max-w-xl mx-auto">
+          Zero marketing fluff. Strictly production-grade Kubernetes manifests, Linux kernel tuning scripts, and high-scale edge delivery post-mortems delivered every Thursday.
+        </p>
+
+        <form class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Subscribed to Weekly Dispatch!');">
+          <div class="relative w-full">
+            <Mail class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
+            <input 
+              type="email" 
+              required 
+              placeholder="architect@domain.com" 
+              class="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#040810] border border-slate-300 dark:border-slate-800 rounded-xl text-xs font-mono text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+            />
+          </div>
+          <button 
+            type="submit" 
+            class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-500 dark:bg-emerald-400 hover:bg-emerald-400 dark:hover:bg-emerald-300 text-slate-950 font-bold font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all shrink-0 active:scale-95"
+          >
+            <span>Subscribe</span>
+            <Send class="w-3.5 h-3.5" />
+          </button>
+        </form>
+      </div>
+    </section>
 
   </main>
 
@@ -313,7 +313,7 @@ const coverImg = getImageUrl(post.data.coverImage);
           const link = document.createElement('a');
           link.href = `#${heading.id}`;
           link.textContent = heading.textContent || '';
-          link.className = `block text-slate-400 hover:text-emerald-400 transition-colors leading-relaxed ${heading.tagName === 'H3' ? 'pl-4 text-slate-500' : 'font-semibold'}`;
+          link.className = `block text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors leading-relaxed ${heading.tagName === 'H3' ? 'pl-4 text-slate-500' : 'font-semibold'}`;
           tocNav.appendChild(link);
         });
       } else {
@@ -458,21 +458,63 @@ const coverImg = getImageUrl(post.data.coverImage);
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.25), inset 0 0 15px rgba(16, 185, 129, 0.05);
   }
 
-  /* Base Typography Styling for WordPress HTML */
-  .article-body { color: #cbd5e1; font-size: 1.05rem; line-height: 1.8; }
+  /* Adaptive Typography Styling for WordPress HTML in Light and Dark Mode */
+  .article-body { color: #334155; font-size: 1.05rem; line-height: 1.8; }
+  :global(.dark) .article-body { color: #cbd5e1; }
+
   .article-body p { margin-bottom: 1.5rem; }
-  .article-body h2 { color: #ffffff; font-size: 1.75rem; font-weight: 800; letter-spacing: -0.025em; margin-top: 2.75rem; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(51, 65, 85, 0.4); scroll-margin-top: 6rem; }
-  .article-body h3 { color: #f1f5f9; font-size: 1.35rem; font-weight: 700; margin-top: 2.25rem; margin-bottom: 1.0rem; scroll-margin-top: 6rem; }
+
+  .article-body h2 { 
+    color: #0f172a; 
+    font-size: 1.75rem; 
+    font-weight: 800; 
+    letter-spacing: -0.025em; 
+    margin-top: 2.75rem; 
+    margin-bottom: 1.25rem; 
+    padding-bottom: 0.5rem; 
+    border-bottom: 1px solid rgba(203, 213, 225, 0.6); 
+    scroll-margin-top: 6rem; 
+  }
+  :global(.dark) .article-body h2 { 
+    color: #ffffff; 
+    border-bottom-color: rgba(51, 65, 85, 0.4); 
+  }
+
+  .article-body h3 { 
+    color: #1e293b; 
+    font-size: 1.35rem; 
+    font-weight: 700; 
+    margin-top: 2.25rem; 
+    margin-bottom: 1.0rem; 
+    scroll-margin-top: 6rem; 
+  }
+  :global(.dark) .article-body h3 { color: #f1f5f9; }
+
   .article-body ul { list-style-type: disc; padding-left: 1.75rem; margin-bottom: 1.75rem; }
   .article-body ol { list-style-type: decimal; padding-left: 1.75rem; margin-bottom: 1.75rem; }
   .article-body li { margin-bottom: 0.5rem; padding-left: 0.25rem; }
-  .article-body strong { color: #ffffff; font-weight: 700; }
-  .article-body a { color: #34d399; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; transition: color 0.2s; }
-  .article-body a:hover { color: #6ee7b7; }
+
+  .article-body strong { color: #0f172a; font-weight: 700; }
+  :global(.dark) .article-body strong { color: #ffffff; }
+
+  .article-body a { color: #059669; text-decoration: underline; text-underline-offset: 4px; font-weight: 500; transition: color 0.2s; }
+  :global(.dark) .article-body a { color: #34d399; }
+  .article-body a:hover { color: #10b981; }
+  :global(.dark) .article-body a:hover { color: #6ee7b7; }
+
   .article-body code { background-color: transparent; color: inherit; padding: 0; border-radius: 0; }
-  .article-body blockquote { border-left: 4px solid #10b981; padding-left: 1.25rem; font-style: italic; color: #94a3b8; margin-top: 1.75rem; margin-bottom: 1.75rem; }
   
-  /* In-Article Images & Figures from WordPress Content */
+  .article-body blockquote { 
+    border-left: 4px solid #10b981; 
+    padding-left: 1.25rem; 
+    font-style: italic; 
+    color: #64748b; 
+    margin-top: 1.75rem; 
+    margin-bottom: 1.75rem; 
+  }
+  :global(.dark) .article-body blockquote { color: #94a3b8; }
+  
+  /* In-Article Images & Figures */
   .article-body figure, .article-body img { 
     border-radius: 1rem; 
     margin-top: 2rem; 
@@ -480,9 +522,22 @@ const coverImg = getImageUrl(post.data.coverImage);
     width: 100%; 
     max-height: 540px;
     object-fit: cover;
-    border: 1px solid #1e293b; 
-    background-color: #090E1A;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid #e2e8f0; 
+    background-color: #f8fafc;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
-  .article-body figcaption { font-size: 0.75rem; font-family: ui-monospace, monospace; color: #64748b; text-align: center; margin-top: 0.5rem; }
+  :global(.dark) .article-body figure, :global(.dark) .article-body img { 
+    border-color: #1e293b; 
+    background-color: #090E1A; 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+  }
+
+  .article-body figcaption { 
+    font-size: 0.75rem; 
+    font-family: ui-monospace, monospace; 
+    color: #94a3b8; 
+    text-align: center; 
+    margin-top: 0.5rem; 
+  }
+  :global(.dark) .article-body figcaption { color: #64748b; }
 </style>

@@ -1,168 +1,127 @@
 ---
-import { Search, X, ArrowRight, CornerDownLeft } from 'lucide-astro';
+// Fetch content collections or generate index
+import { getCollection } from 'astro:content';
+const posts = await getCollection('blog').catch(() => []);
+const searchIndex = posts.map(post => ({
+  title: post.data.title,
+  description: post.data.description || '',
+  slug: `/blog/${post.slug}/`
+}));
 ---
 
-<!-- Modal Backdrop -->
-<div 
-  id="search-modal-backdrop" 
-  class="fixed inset-0 bg-black/80 backdrop-blur-md z-[150] opacity-0 pointer-events-none transition-opacity duration-200 flex items-start justify-center pt-20 sm:pt-28 px-4"
+<!-- Trigger Button (Drop this into your Header.astro) -->
+<button 
+  id="search-trigger-btn"
+  type="button" 
+  class="flex items-center gap-3 px-3 py-1.5 rounded-full border border-slate-300 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-900/50 hover:border-emerald-500/50 text-slate-500 dark:text-slate-400 text-xs font-mono transition-all"
+  aria-label="Open Command Palette"
 >
-  <!-- Modal Dialog -->
-  <div 
-    id="search-modal-dialog" 
-    class="w-full max-w-2xl bg-[#090D16] border border-emerald-500/30 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] overflow-hidden scale-95 transition-all duration-200"
-  >
-    <!-- Search Bar Input -->
-    <div class="relative flex items-center px-4 py-3.5 border-b border-slate-800">
-      <Search class="w-5 h-5 text-emerald-400 shrink-0 mr-3" />
+  <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+  <span>Command Palette</span>
+  <kbd class="px-1.5 py-0.5 text-[10px] rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-slate-700">⌘K</kbd>
+</button>
+
+<!-- Modal Backdrop & Dialog -->
+<div id="search-modal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm p-4 sm:p-6 md:p-20 overflow-y-auto">
+  <div class="max-w-xl mx-auto rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B131E] shadow-2xl overflow-hidden transition-all">
+    <div class="flex items-center gap-3 px-4 py-3 border-b border-slate-200 dark:border-slate-800">
+      <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
       <input 
         id="search-input" 
         type="text" 
-        placeholder="Search guides, architecture, Kubernetes, DevOps..." 
-        autocomplete="off" 
-        class="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none font-mono"
+        placeholder="Search guides, architectures, pipelines..." 
+        autocomplete="off"
+        class="w-full bg-transparent text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none font-mono"
       />
-      <button 
-        id="search-close" 
-        class="p-1 rounded-lg text-slate-500 hover:text-white hover:bg-slate-800/80 transition-colors shrink-0 ml-2"
-        aria-label="Close search"
-      >
-        <X class="w-4 h-4" />
-      </button>
+      <button id="search-close-btn" class="text-xs text-slate-400 hover:text-slate-600 dark:hover:text-white font-mono px-2 py-1 rounded">ESC</button>
     </div>
 
     <!-- Search Results Container -->
-    <div id="search-results" class="max-h-80 overflow-y-auto p-3 space-y-1 divide-y divide-slate-800/40">
-      <div id="search-empty" class="p-6 text-center text-xs font-mono text-slate-500">
-        Type keywords to query architecture playbooks...
-      </div>
-    </div>
+    <ul id="search-results" class="max-h-72 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800/60 p-2 empty:hidden"></ul>
 
-    <!-- Modal Footer Controls -->
-    <div class="px-4 py-2.5 bg-slate-900/60 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-500">
-      <div class="flex items-center gap-3">
-        <span class="flex items-center gap-1">
-          <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">ESC</kbd> to close
-        </span>
-        <span class="flex items-center gap-1">
-          <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-0.5"><CornerDownLeft class="w-2.5 h-2.5" /> Enter</kbd> to select
-        </span>
-      </div>
-      <span class="text-emerald-400">DevStackHub Engine</span>
+    <div id="search-empty" class="hidden p-8 text-center text-xs text-slate-500 dark:text-slate-400 font-mono">
+      No blueprint or technical guide matches this query.
     </div>
   </div>
 </div>
 
-<script>
-  let articles: any[] = [];
-  let fetched = false;
-
-  const modalBackdrop = document.getElementById('search-modal-backdrop');
-  const modalDialog = document.getElementById('search-modal-dialog');
-  const searchInput = document.getElementById('search-input') as HTMLInputElement | null;
-  const searchClose = document.getElementById('search-close');
-  const searchResults = document.getElementById('search-results');
-  const searchTrigger = document.getElementById('search-trigger');
-
-  async function loadIndex() {
-    if (fetched) return;
-    try {
-      const res = await fetch('/api/search.json');
-      articles = await res.json();
-      fetched = true;
-    } catch (e) {
-      console.error('Failed to load search index:', e);
-    }
-  }
+<script is:inline define:vars={{ searchIndex }}>
+  const modal = document.getElementById('search-modal');
+  const triggerBtn = document.getElementById('search-trigger-btn');
+  const closeBtn = document.getElementById('search-close-btn');
+  const searchInput = document.getElementById('search-input');
+  const resultsContainer = document.getElementById('search-results');
+  const emptyMessage = document.getElementById('search-empty');
 
   function openSearch() {
-    loadIndex();
-    modalBackdrop?.classList.remove('opacity-0', 'pointer-events-none');
-    modalDialog?.classList.remove('scale-95');
-    modalDialog?.classList.add('scale-100');
-    setTimeout(() => searchInput?.focus(), 50);
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => searchInput.focus(), 50);
   }
 
   function closeSearch() {
-    modalBackdrop?.classList.add('opacity-0', 'pointer-events-none');
-    modalDialog?.classList.remove('scale-100');
-    modalDialog?.classList.add('scale-95');
-    if (searchInput) searchInput.value = '';
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    searchInput.value = '';
     renderResults([]);
   }
 
-  function renderResults(items: any[]) {
-    if (!searchResults) return;
-
-    if (!searchInput?.value.trim()) {
-      searchResults.innerHTML = `
-        <div class="p-6 text-center text-xs font-mono text-slate-500">
-          Type keywords to query architecture playbooks...
-        </div>`;
-      return;
+  // Keyboard shortcut listener: Cmd + K or Ctrl + K
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      modal.classList.contains('hidden') ? openSearch() : closeSearch();
     }
-
-    if (items.length === 0) {
-      searchResults.innerHTML = `
-        <div class="p-6 text-center text-xs font-mono text-slate-500">
-          No playbooks matched your query.
-        </div>`;
-      return;
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeSearch();
     }
+  });
 
-    searchResults.innerHTML = items.map((item, idx) => `
-      <a 
-        href="${item.url}" 
-        class="search-item block p-3 rounded-xl hover:bg-emerald-500/10 border border-transparent hover:border-emerald-500/30 transition-all group ${idx === 0 ? 'bg-slate-900/40' : ''}"
-      >
-        <div class="flex items-center justify-between gap-2">
-          <div class="flex items-center gap-2">
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              ${item.category}
-            </span>
-            <h4 class="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
-              ${item.title}
-            </h4>
-          </div>
-          <span class="text-xs font-mono text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-            Read <span class="text-sm">→</span>
-          </span>
-        </div>
-        <p class="text-xs text-slate-400 mt-1 line-clamp-1">${item.description}</p>
-      </a>
-    `).join('');
-  }
+  triggerBtn?.addEventListener('click', openSearch);
+  closeBtn?.addEventListener('click', closeSearch);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeSearch();
+  });
 
+  // Query filter
   searchInput?.addEventListener('input', (e) => {
-    const q = (e.target as HTMLInputElement).value.toLowerCase().trim();
-    if (!q) {
+    const query = e.target.value.toLowerCase().trim();
+    if (!query) {
       renderResults([]);
       return;
     }
 
-    const filtered = articles.filter((a: any) => 
-      a.title.toLowerCase().includes(q) ||
-      a.description.toLowerCase().includes(q) ||
-      a.category.toLowerCase().includes(q)
+    const filtered = searchIndex.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.description.toLowerCase().includes(query)
     );
 
     renderResults(filtered);
   });
 
-  searchTrigger?.addEventListener('click', openSearch);
-  searchClose?.addEventListener('click', closeSearch);
-
-  modalBackdrop?.addEventListener('click', (e) => {
-    if (e.target === modalBackdrop) closeSearch();
-  });
-
-  window.addEventListener('keydown', (e) => {
-    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault();
-      modalBackdrop?.classList.contains('opacity-0') ? openSearch() : closeSearch();
+  function renderResults(items) {
+    resultsContainer.innerHTML = '';
+    if (items.length === 0 && searchInput.value.trim() !== '') {
+      emptyMessage.classList.remove('hidden');
+      return;
     }
-    if (e.key === 'Escape' && !modalBackdrop?.classList.contains('opacity-0')) {
-      closeSearch();
-    }
-  });
+    emptyMessage.classList.add('hidden');
+
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <a href="${item.slug}" class="block p-3 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors group">
+          <div class="text-sm font-semibold text-slate-900 dark:text-white group-hover:text-emerald-500 dark:group-hover:text-emerald-400">
+            ${item.title}
+          </div>
+          ${item.description ? `<p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">${item.description}</p>` : ''}
+        </a>
+      `;
+      resultsContainer.appendChild(li);
+    });
+  }
 </script>

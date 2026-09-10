@@ -55,8 +55,8 @@ const getImageUrl = (img?: string) => {
     <!-- Hero Split Layout -->
     <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       <div class="lg:col-span-7 flex flex-col items-start text-left">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)] mb-6">
-          <Sparkles class="w-3.5 h-3.5 text-emerald-400" />
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.15)] mb-6">
+          <Sparkles class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
           <span>PRODUCTION-GRADE ARCHITECTURE PLAYBOOKS</span>
         </div>
 
@@ -136,80 +136,80 @@ const getImageUrl = (img?: string) => {
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Track 1: Cloud & DevOps -->
-        <a href="/category/cloud-devops/" class="neon-card-hover group p-6 rounded-2xl bg-[#090E1A]/90 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between">
+        <a href="/category/cloud-devops/" class="neon-card-hover group p-6 rounded-2xl bg-white dark:bg-[#090E1A]/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-sm dark:shadow-none transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <Cloud class="w-5 h-5" />
               </div>
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                 {countCategory('devops')} GUIDES
               </span>
             </div>
-            <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">Cloud & DevOps</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Kubernetes, Terraform, AWS, Docker containers, CI/CD automation.</p>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Cloud & DevOps</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">Kubernetes, Terraform, AWS, Docker containers, CI/CD automation.</p>
           </div>
-          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-400 font-mono transition-colors">
+          <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 font-mono transition-colors">
             <span>View Track</span>
             <ChevronRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </div>
         </a>
 
         <!-- Track 2: System Admin -->
-        <a href="/category/system-admin/" class="neon-card-hover group p-6 rounded-2xl bg-[#090E1A]/90 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between">
+        <a href="/category/system-admin/" class="neon-card-hover group p-6 rounded-2xl bg-white dark:bg-[#090E1A]/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-sm dark:shadow-none transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <Server class="w-5 h-5" />
               </div>
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                 {countCategory('sysadmin')} GUIDES
               </span>
             </div>
-            <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">System Admin</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Linux kernel tuning, SSH hardening, systemd, networking protocols.</p>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">System Admin</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">Linux kernel tuning, SSH hardening, systemd, networking protocols.</p>
           </div>
-          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-400 font-mono transition-colors">
+          <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 font-mono transition-colors">
             <span>View Track</span>
             <ChevronRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </div>
         </a>
 
         <!-- Track 3: Modern Web -->
-        <a href="/category/web-dev/" class="neon-card-hover group p-6 rounded-2xl bg-[#090E1A]/90 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between">
+        <a href="/category/web-dev/" class="neon-card-hover group p-6 rounded-2xl bg-white dark:bg-[#090E1A]/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-sm dark:shadow-none transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <Code2 class="w-5 h-5" />
               </div>
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                 {countCategory('webdev')} GUIDES
               </span>
             </div>
-            <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">Modern Web</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Jamstack, Astro, TypeScript, edge runtimes, API architectures.</p>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Modern Web</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">Jamstack, Astro, TypeScript, edge runtimes, API architectures.</p>
           </div>
-          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-400 font-mono transition-colors">
+          <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 font-mono transition-colors">
             <span>View Track</span>
             <ChevronRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </div>
         </a>
 
         <!-- Track 4: Guides & Tutorials -->
-        <a href="/category/guides/" class="neon-card-hover group p-6 rounded-2xl bg-[#090E1A]/90 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between">
+        <a href="/category/guides/" class="neon-card-hover group p-6 rounded-2xl bg-white dark:bg-[#090E1A]/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-sm dark:shadow-none transition-all duration-300 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-4">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
                 <BookOpen class="w-5 h-5" />
               </div>
-              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+              <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                 {countCategory('guides')} GUIDES
               </span>
             </div>
-            <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors">Guides & Tutorials</h3>
-            <p class="text-xs text-slate-400 mt-2 leading-relaxed">Hands-on walkthroughs, setup scripts, and quick reference playbooks.</p>
+            <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Guides & Tutorials</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">Hands-on walkthroughs, setup scripts, and quick reference playbooks.</p>
           </div>
-          <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-400 font-mono transition-colors">
+          <div class="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 font-mono transition-colors">
             <span>View Track</span>
             <ChevronRight class="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </div>
@@ -219,19 +219,19 @@ const getImageUrl = (img?: string) => {
 
     <!-- Interactive Filtered Guide Feed -->
     <section id="guides" class="mt-24">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-800">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div>
-          <span class="text-xs font-mono font-semibold tracking-wider text-emerald-400 uppercase">Production Field Manuals</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Featured Architecture Playbooks</h2>
+          <span class="text-xs font-mono font-semibold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">Production Field Manuals</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Featured Architecture Playbooks</h2>
         </div>
         
         <!-- Filter Tabs -->
-        <div id="filter-buttons" class="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900/90 border border-slate-800 text-xs font-mono overflow-x-auto max-w-full shadow-sm">
+        <div id="filter-buttons" class="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs font-mono overflow-x-auto max-w-full shadow-sm">
           <button data-filter="all" class="filter-btn active px-3 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold transition-all whitespace-nowrap">All Tracks</button>
-          <button data-filter="devops" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all whitespace-nowrap">Cloud & DevOps</button>
-          <button data-filter="sysadmin" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all whitespace-nowrap">SysAdmin</button>
-          <button data-filter="webdev" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all whitespace-nowrap">Web Dev</button>
-          <button data-filter="guides" class="filter-btn px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition-all whitespace-nowrap">Guides</button>
+          <button data-filter="devops" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all whitespace-nowrap">Cloud & DevOps</button>
+          <button data-filter="sysadmin" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all whitespace-nowrap">SysAdmin</button>
+          <button data-filter="webdev" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all whitespace-nowrap">Web Dev</button>
+          <button data-filter="guides" class="filter-btn px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all whitespace-nowrap">Guides</button>
         </div>
       </div>
 
@@ -240,36 +240,36 @@ const getImageUrl = (img?: string) => {
         {posts.map((post) => {
           const coverImg = getImageUrl(post.data.coverImage);
           return (
-            <article data-category={getCategoryKey(post.data.category)} class="guide-card neon-card-hover group/card rounded-2xl bg-[#090E1A]/90 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+            <article data-category={getCategoryKey(post.data.category)} class="guide-card neon-card-hover group/card rounded-2xl bg-white dark:bg-[#090E1A]/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-sm dark:shadow-none transition-all duration-300 flex flex-col justify-between overflow-hidden">
               <div>
                 {coverImg && (
-                  <div class="w-full h-48 overflow-hidden bg-slate-900 relative border-b border-slate-800/80">
+                  <div class="w-full h-48 overflow-hidden bg-slate-100 dark:bg-slate-900 relative border-b border-slate-100 dark:border-slate-800/80">
                     <img 
                       src={coverImg} 
                       alt={post.data.title} 
                       loading="lazy"
                       class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#090E1A] via-transparent to-transparent opacity-60"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-white/80 dark:from-[#090E1A] via-transparent to-transparent opacity-60"></div>
                   </div>
                 )}
 
                 <div class="p-6">
                   <!-- Badges matching Track Cards -->
                   <div class="flex items-center justify-between gap-2 mb-4">
-                    <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+                    <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                       {post.data.category}
                     </span>
-                    <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
+                    <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-[0_0_12px_rgba(16,185,129,0.15)]">
                       {post.data.badge}
                     </span>
                   </div>
 
-                  <h3 class="text-base sm:text-lg font-bold text-white group-hover/card:text-emerald-400 transition-colors leading-snug">
+                  <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover/card:text-emerald-600 dark:group-hover/card:text-emerald-400 transition-colors leading-snug">
                     <a href={`/${post.id}/`}>{post.data.title}</a>
                   </h3>
 
-                  <p class="text-xs text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
+                  <p class="text-xs text-slate-600 dark:text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
                     {post.data.description}
                   </p>
                 </div>
@@ -277,13 +277,13 @@ const getImageUrl = (img?: string) => {
 
               <!-- Action Bar -->
               <div class="p-6 pt-0 mt-2">
-                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500 font-mono">
-                  <span class="flex items-center gap-1.5 text-slate-400 text-[11px]">
-                    <Clock class="w-3.5 h-3.5 text-slate-400" /> {post.data.readTime}
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 font-mono">
+                  <span class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px]">
+                    <Clock class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" /> {post.data.readTime}
                   </span>
                   <a 
                     href={`/${post.id}/`} 
-                    class="group/btn inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 transition-all duration-300 transform hover:scale-110 origin-right"
+                    class="group/btn inline-flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 dark:hover:text-emerald-300 transition-all duration-300 transform hover:scale-110 origin-right"
                   >
                     <span>Read Guide</span> 
                     <ArrowUpRight class="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
@@ -297,37 +297,37 @@ const getImageUrl = (img?: string) => {
     </section>
 
     <!-- Weekly Architecture Dispatch Newsletter Card -->
-    <section class="max-w-5xl mx-auto mt-24 neon-card-hover rounded-3xl bg-[#090E1A]/95 border border-slate-800/80 p-8 sm:p-14 text-center relative overflow-hidden transition-all duration-300">
+    <section class="max-w-5xl mx-auto mt-24 neon-card-hover rounded-3xl bg-white dark:bg-[#090E1A]/95 border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none p-8 sm:p-14 text-center relative overflow-hidden transition-all duration-300">
       <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="relative z-10 max-w-2xl mx-auto">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-mono font-bold tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 uppercase mb-6 shadow-sm">
-          <Radio class="w-3 h-3 text-emerald-400 animate-pulse" />
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-[11px] font-mono font-bold tracking-widest text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 uppercase mb-6 shadow-sm">
+          <Radio class="w-3 h-3 text-emerald-600 dark:text-emerald-400 animate-pulse" />
           Weekly Architecture Telemetry
         </div>
 
-        <h2 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-snug">
+        <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
           Join 2,500+ Engineers Receiving Our <br class="hidden sm:inline" />
-          <span class="text-emerald-400">Weekly Dispatch</span>
+          <span class="text-emerald-600 dark:text-emerald-400">Weekly Dispatch</span>
         </h2>
 
-        <p class="text-xs sm:text-sm text-slate-400 mt-4 leading-relaxed font-sans max-w-xl mx-auto">
+        <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-4 leading-relaxed font-sans max-w-xl mx-auto">
           Zero marketing fluff. Strictly production-grade Kubernetes manifests, Linux kernel tuning scripts, and high-scale edge delivery post-mortems delivered every Thursday.
         </p>
 
         <form class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto" onsubmit="event.preventDefault(); alert('Subscribed to Weekly Dispatch!');">
           <div class="relative w-full">
-            <Mail class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+            <Mail class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-slate-500" />
             <input 
               type="email" 
               required 
               placeholder="architect@domain.com" 
-              class="w-full pl-10 pr-4 py-3 bg-[#040810] border border-slate-800 rounded-xl text-xs font-mono text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
+              class="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-[#040810] border border-slate-300 dark:border-slate-800 rounded-xl text-xs font-mono text-slate-900 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition-colors"
             />
           </div>
           <button 
             type="submit" 
-            class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(52,211,153,0.4)] transition-all shrink-0 active:scale-95"
+            class="w-full sm:w-auto px-6 py-3 rounded-xl bg-emerald-500 dark:bg-emerald-400 hover:bg-emerald-400 dark:hover:bg-emerald-300 text-slate-950 font-bold font-mono text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all shrink-0 active:scale-95"
           >
             <span>Subscribe</span>
             <Send class="w-3.5 h-3.5" />
@@ -349,10 +349,10 @@ const getImageUrl = (img?: string) => {
     btn.addEventListener('click', () => {
       buttons.forEach((b) => {
         b.classList.remove('bg-emerald-500', 'text-slate-950', 'font-bold');
-        b.classList.add('text-slate-400');
+        b.classList.add('text-slate-600', 'dark:text-slate-400');
       });
       btn.classList.add('bg-emerald-500', 'text-slate-950', 'font-bold');
-      btn.classList.remove('text-slate-400');
+      btn.classList.remove('text-slate-600', 'dark:text-slate-400');
 
       const filter = btn.getAttribute('data-filter');
       cards.forEach((card) => {

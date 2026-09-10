@@ -195,13 +195,19 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
 
     function formatBotOutput(str) {
       let formatted = str
-        .replace(/^(bash|sh|json|yaml|yml)\b/gm, '')
+        .replace(/^(bash|sh|json|yaml|yml|dockerfile)\b/gm, '')
         .trim();
 
-      return escapeHtml(formatted)
+      let html = escapeHtml(formatted)
+        .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
         .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-500 underline" target="_blank">$1</a>');
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-500 underline hover:text-emerald-400" target="_blank">$1</a>');
+
+      // Auto-turn raw guide paths (e.g. /terraform-on-azure-iac-guide/) into direct clickable links
+      html = html.replace(/(\/[a-z0-9\-_]+\/)/g, '<a href="$1" class="text-emerald-500 font-semibold underline hover:text-emerald-400">$1</a>');
+
+      return html;
     }
   });
 </script>

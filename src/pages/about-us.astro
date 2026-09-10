@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
-import { ArrowLeft, Terminal, Cloud, Layers, Cpu, Wrench, ShieldCheck, Mail } from 'lucide-astro';
+import { ArrowLeft, Terminal, Cloud, Layers, Cpu, Wrench, ShieldCheck, Mail, Copy, Check } from 'lucide-astro';
 ---
 
 <BaseLayout 
@@ -112,13 +112,46 @@ import { ArrowLeft, Terminal, Cloud, Layers, Cpu, Wrench, ShieldCheck, Mail } fr
         </div>
         <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
           Have a question, feedback, or a technical inquiry? Reach out directly via our 
-          <a href="/contact-us/" class="text-emerald-400 underline hover:text-emerald-300 font-medium">Contact page</a> 
+          <a href="/contact-us/" class="text-emerald-400 underline hover:text-emerald-300 font-medium transition-colors">Contact page</a> 
           or email us at 
-          <a href="mailto:contact@devstackhub.tech" class="text-emerald-400 font-mono underline hover:text-emerald-300 ml-1">
-            contact@devstackhub.tech
-          </a>.
+          <button 
+            id="copy-email-btn" 
+            type="button" 
+            class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:text-emerald-300 font-mono text-xs sm:text-sm hover:bg-emerald-500/20 transition-all cursor-pointer align-baseline ml-1"
+            title="Click to copy email address"
+          >
+            <span id="copy-email-text">contact@devstackhub.tech</span>
+            <Copy id="copy-icon" class="w-3.5 h-3.5 text-emerald-400" />
+            <Check id="check-icon" class="w-3.5 h-3.5 text-emerald-300 hidden" />
+          </button>.
         </p>
       </section>
     </div>
   </main>
 </BaseLayout>
+
+<script>
+  const copyBtn = document.getElementById('copy-email-btn');
+  const copyText = document.getElementById('copy-email-text');
+  const copyIcon = document.getElementById('copy-icon');
+  const checkIcon = document.getElementById('check-icon');
+
+  copyBtn?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText('contact@devstackhub.tech');
+      if (copyText && copyIcon && checkIcon) {
+        copyText.textContent = 'Copied!';
+        copyIcon.classList.add('hidden');
+        checkIcon.classList.remove('hidden');
+
+        setTimeout(() => {
+          copyText.textContent = 'contact@devstackhub.tech';
+          copyIcon.classList.remove('hidden');
+          checkIcon.classList.add('hidden');
+        }, 2000);
+      }
+    } catch {
+      window.location.href = 'mailto:contact@devstackhub.tech';
+    }
+  });
+</script>

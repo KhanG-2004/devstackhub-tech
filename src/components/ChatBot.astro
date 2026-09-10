@@ -1,5 +1,5 @@
 ---
-import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
+import { Terminal, Send, X, Bot, Sparkles, ExternalLink } from 'lucide-astro';
 ---
 
 <!-- Floating Launcher Button -->
@@ -108,19 +108,6 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
       }
     }
 
-    // Resolve relative slugs safely into full absolute URLs to prevent homepage redirects
-    document.addEventListener('click', (e) => {
-      const linkTarget = e.target.closest('.terminal-nav-link');
-      if (linkTarget) {
-        e.preventDefault();
-        const slug = linkTarget.getAttribute('data-slug');
-        if (slug) {
-          const absoluteUrl = new URL(slug, window.location.origin).href;
-          window.open(absoluteUrl, '_blank', 'noopener,noreferrer');
-        }
-      }
-    });
-
     function toggleChat() {
       if (!chatWindow) return;
       const isHidden = chatWindow.classList.contains('hidden');
@@ -188,12 +175,29 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
           </div>
         `;
       } else {
+        // Extract any article path/slug from the response text to build a native action button
+        const pathMatch = text.match(/(\/[a-z0-9\-_]+\/)/);
+        let actionButtonHtml = '';
+        
+        if (pathMatch) {
+          const articlePath = pathMatch[1];
+          actionButtonHtml = `
+            <div class="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
+              <a href="${articlePath}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 font-bold transition-colors">
+                <span>📖 Open Article Guide</span>
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+              </a>
+            </div>
+          `;
+        }
+
         msgDiv.innerHTML = `
           <div class="w-6 h-6 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center shrink-0 mt-0.5">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
           </div>
           <div class="bg-white dark:bg-[#090E1A] border border-slate-200 dark:border-slate-800/80 rounded-xl p-3 shadow-sm max-w-[88%] whitespace-pre-wrap leading-relaxed">
             ${formatBotOutput(text)}
+            ${actionButtonHtml}
           </div>
         `;
       }
@@ -228,22 +232,10 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
         .replace(/^(bash|sh|json|yaml|yml|dockerfile)\b/gm, '')
         .trim();
 
-      let html = escapeHtml(formatted)
+      return escapeHtml(formatted)
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
-        .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        // Render markdown links cleanly, keeping exact original slugs untouched
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-          if (!url) return text;
-          return `<span class="terminal-nav-link text-emerald-500 underline hover:text-emerald-400 font-semibold cursor-pointer" data-slug="${url}">${text}</span>`;
-        });
-
-      // Auto-detect raw article paths while keeping slugs untouched
-      html = html.replace(/(\/[a-z0-9\-_]+\/)/g, (match, path) => {
-        return `<span class="terminal-nav-link text-emerald-500 font-semibold underline hover:text-emerald-400 cursor-pointer" data-slug="${path}">${path}</span>`;
-      });
-
-      return html;
+        .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>');
     }
   });
 </script>

@@ -95,6 +95,19 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
     const messagesBox = document.getElementById('chat-messages');
     const sendBtn = document.getElementById('chat-send-btn');
 
+    // Restore chat history from sessionStorage if available
+    const savedHistory = sessionStorage.getItem('devstack_chat_history');
+    if (savedHistory && messagesBox) {
+      messagesBox.innerHTML = savedHistory;
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+    }
+
+    function saveHistory() {
+      if (messagesBox) {
+        sessionStorage.setItem('devstack_chat_history', messagesBox.innerHTML);
+      }
+    }
+
     function toggleChat() {
       if (!chatWindow) return;
       const isHidden = chatWindow.classList.contains('hidden');
@@ -144,6 +157,7 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
       } finally {
         if (sendBtn) sendBtn.disabled = false;
         messagesBox.scrollTop = messagesBox.scrollHeight;
+        saveHistory();
       }
     });
 
@@ -172,6 +186,7 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
       }
       messagesBox.appendChild(msgDiv);
       messagesBox.scrollTop = messagesBox.scrollHeight;
+      saveHistory();
     }
 
     function appendLoading() {
@@ -202,10 +217,11 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
         .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-500 underline hover:text-emerald-400" target="_blank">$1</a>');
+        // Force markdown links to open in a new tab securely
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-emerald-500 underline hover:text-emerald-400 font-semibold" target="_blank" rel="noopener noreferrer">$1</a>');
 
-      // Auto-turn raw guide paths (e.g. /terraform-on-azure-iac-guide/) into direct clickable links
-      html = html.replace(/(\/[a-z0-9\-_]+\/)/g, '<a href="$1" class="text-emerald-500 font-semibold underline hover:text-emerald-400">$1</a>');
+      // Force auto-detected raw paths to open in a new tab securely
+      html = html.replace(/(\/[a-z0-9\-_]+\/)/g, '<a href="$1" class="text-emerald-500 font-semibold underline hover:text-emerald-400" target="_blank" rel="noopener noreferrer">$1</a>');
 
       return html;
     }

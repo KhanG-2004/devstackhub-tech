@@ -108,18 +108,6 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
       }
     }
 
-    // Global click delegation for safe programmatic link opening
-    document.addEventListener('click', (e) => {
-      const linkTarget = e.target.closest('.chat-guide-link');
-      if (linkTarget) {
-        e.preventDefault();
-        const path = linkTarget.getAttribute('data-url');
-        if (path) {
-          window.open(path, '_blank', 'noopener,noreferrer');
-        }
-      }
-    });
-
     function toggleChat() {
       if (!chatWindow) return;
       const isHidden = chatWindow.classList.contains('hidden');
@@ -221,6 +209,8 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
     }
 
     function formatBotOutput(str) {
+      if (!str) return '';
+
       let formatted = str
         .replace(/^(bash|sh|json|yaml|yml|dockerfile)\b/gm, '')
         .trim();
@@ -229,15 +219,15 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
         .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        // Convert markdown links to secure clickable spans
+        // Safe markdown link handler preserving exact original URLs and slugs
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-          const cleanUrl = url.startsWith('http') ? url : (url.startsWith('/') ? url : '/' + url);
-          return `<span class="chat-guide-link text-emerald-500 underline hover:text-emerald-400 font-semibold cursor-pointer" data-url="${cleanUrl}">${text}</span>`;
+          if (!url) return text;
+          return `<a href="${url}" class="text-emerald-500 underline hover:text-emerald-400 font-semibold" target="_blank" rel="noopener noreferrer">${text}</a>`;
         });
 
-      // Convert auto-detected paths into secure clickable spans
+      // Auto-detect raw paths preserving exact slugs for SEO safety
       html = html.replace(/(\/[a-z0-9\-_]+\/)/g, (match, path) => {
-        return `<span class="chat-guide-link text-emerald-500 font-semibold underline hover:text-emerald-400 cursor-pointer" data-url="${path}">${path}</span>`;
+        return `<a href="${path}" class="text-emerald-500 font-semibold underline hover:text-emerald-400" target="_blank" rel="noopener noreferrer">${path}</a>`;
       });
 
       return html;

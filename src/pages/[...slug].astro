@@ -655,4 +655,66 @@ const breadcrumbSchema = {
     margin-top: 0.5rem; 
   }
   html.dark .article-body figcaption { color: #64748b; }
+
+  /* Article Table Formatting */
+  .article-body table {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    text-align: left;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    display: table;
+  }
+  html.dark .article-body table {
+    border-color: #1e293b;
+    background-color: #090e1a;
+  }
+
+  .article-body thead {
+    background-color: #f1f5f9;
+    border-bottom: 2px solid #cbd5e1;
+  }
+  html.dark .article-body thead {
+    background-color: #0f172a;
+    border-bottom-color: #334155;
+  }
+
+  .article-body th {
+    padding: 0.75rem 1rem;
+    font-weight: 700;
+    font-family: ui-monospace, monospace;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #0f172a;
+  }
+  html.dark .article-body th {
+    color: #34d399;
+  }
+
+  .article-body td {
+    padding: 0.875rem 1rem;
+    vertical-align: top;
+    border-bottom: 1px solid #e2e8f0;
+    line-height: 1.6;
+  }
+  html.dark .article-body td {
+    border-bottom-color: #1e293b;
+    color: #cbd5e1;
+  }
+
+  .article-body tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .article-body tbody tr:hover {
+    background-color: rgba(241, 245, 249, 0.6);
+  }
+  html.dark .article-body tbody tr:hover {
+    background-color: rgba(15, 23, 42, 0.6);
+  }
 </style>

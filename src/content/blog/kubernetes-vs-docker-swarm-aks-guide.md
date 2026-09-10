@@ -28,7 +28,14 @@ author: "Farraz Ahmed"
 
 
 
-<figure class="wp-block-table"><table class="has-fixed-layout"><thead><tr><td><strong>Core Architecture Feature</strong></td><td><strong>Docker Swarm</strong></td><td><strong>Kubernetes (K8s / Azure AKS)</strong></td></tr></thead><tbody><tr><td><strong>Learning Curve &amp; Usability</strong></td><td>Low: Uses native Docker CLI syntax (<code>docker stack deploy</code>)</td><td>High: Requires understanding API primitives (Pods, Deployments, Services, CRDs)</td></tr><tr><td><strong>Control Plane Management</strong></td><td>Integrated directly into Docker Engine via Raft consensus</td><td>Complex distributed control plane (API server, etcd, scheduler, controllers)</td></tr><tr><td><strong>Auto-Scaling Mechanics</strong></td><td>Manual replica configuration or custom API scripts</td><td>Native Horizontal Pod Autoscaler (HPA), Vertical Pod Autoscaler (VPA), &amp; Cluster Autoscaler</td></tr><tr><td><strong>Traffic Ingress &amp; Routing</strong></td><td>Layer 4 ingress routing mesh (port-based)</td><td>Native Layer 7 Ingress Controllers (NGINX, Traefik, Envoy) with automated TLS termination</td></tr><tr><td><strong>Ecosystem &amp; Cloud Support</strong></td><td>Minimal third-party ecosystem; limited managed cloud options</td><td>| <strong>Ecosystem &amp; Cloud Support</strong> | Minimal third-party ecosystem; limited managed cloud options | De facto industry standard governed by the <a href="https://www.cncf.io/" target="_blank" rel="noreferrer noopener">Cloud Native Computing Foundation (CNCF)</a>; native support across AWS, Azure, and GCP |</td></tr><tr><td><strong>Resource Overhead</strong></td><td>Extremely low (~50MB RAM control plane per node)</td><td>Significant control plane resource footprint (mitigated by managed offerings like AKS)</td></tr></tbody></table></figure>
+| Core Architecture Feature | Docker Swarm | Kubernetes (K8s / Azure AKS) |
+| :--- | :--- | :--- |
+| **Learning Curve & Usability** | Low: Uses native Docker CLI syntax (`docker stack deploy`) | High: Requires understanding API primitives (Pods, Deployments, Services, CRDs) |
+| **Control Plane Management** | Integrated directly into Docker Engine via Raft consensus | Complex distributed control plane (API server, etcd, scheduler, controllers) |
+| **Auto-Scaling Mechanics** | Manual replica configuration or custom API scripts | Native Horizontal Pod Autoscaler (HPA), Vertical Pod Autoscaler (VPA), & Cluster Autoscaler |
+| **Traffic Ingress & Routing** | Layer 4 ingress routing mesh (port-based) | Native Layer 7 Ingress Controllers (NGINX, Traefik, Envoy) with automated TLS termination |
+| **Ecosystem & Cloud Support** | Minimal third-party ecosystem; limited managed cloud options | De facto industry standard governed by the [Cloud Native Computing Foundation (CNCF)](https://www.cncf.io/); native support across AWS, Azure, and GCP |
+| **Resource Overhead** | Extremely low (~50MB RAM control plane per node) | Significant control plane resource footprint (mitigated by managed offerings like AKS) |
 
 
 
@@ -343,4 +350,3 @@ spec:
 
 
 <p class="wp-block-paragraph"></p>
-

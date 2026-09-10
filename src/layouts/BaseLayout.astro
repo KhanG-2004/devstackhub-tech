@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ChatBot from '../components/ChatBot.astro';
 
 interface Props {
   title?: string;
@@ -36,6 +37,7 @@ const {
     </script>
   </head>
   <body class="bg-slate-50 text-slate-900 dark:bg-[#060911] dark:text-slate-100 min-h-screen font-sans selection:bg-emerald-500 selection:text-white transition-colors duration-300">
-    <slot />
+   <slot />
+    <ChatBot />
   </body>
 </html>

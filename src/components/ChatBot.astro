@@ -108,14 +108,15 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
       }
     }
 
-    // Secure delegated click handler that completely avoids about:blank#blocked errors
+    // Resolve relative slugs safely into full absolute URLs to prevent homepage redirects
     document.addEventListener('click', (e) => {
       const linkTarget = e.target.closest('.terminal-nav-link');
       if (linkTarget) {
         e.preventDefault();
         const slug = linkTarget.getAttribute('data-slug');
         if (slug) {
-          window.open(slug, '_blank', 'noopener,noreferrer');
+          const absoluteUrl = new URL(slug, window.location.origin).href;
+          window.open(absoluteUrl, '_blank', 'noopener,noreferrer');
         }
       }
     });
@@ -231,13 +232,13 @@ import { Terminal, Send, X, Bot, Sparkles } from 'lucide-astro';
         .replace(/\*\*([^*]+)\*\*/g, '<strong class="font-bold text-slate-900 dark:text-white">$1</strong>')
         .replace(/\`\`\`([\s\S]*?)\`\`\`/g, '<pre class="my-2 p-2.5 rounded-lg bg-slate-900 text-emerald-400 overflow-x-auto text-[11px]"><code>$1</code></pre>')
         .replace(/\`([^`]+)\`/g, '<code class="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-emerald-600 dark:text-emerald-400">$1</code>')
-        // Render links safely as interactive data attributes preserving exact slugs
+        // Render markdown links cleanly, keeping exact original slugs untouched
         .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
           if (!url) return text;
           return `<span class="terminal-nav-link text-emerald-500 underline hover:text-emerald-400 font-semibold cursor-pointer" data-slug="${url}">${text}</span>`;
         });
 
-      // Auto-detect raw article paths preserving exact slugs for SEO safety
+      // Auto-detect raw article paths while keeping slugs untouched
       html = html.replace(/(\/[a-z0-9\-_]+\/)/g, (match, path) => {
         return `<span class="terminal-nav-link text-emerald-500 font-semibold underline hover:text-emerald-400 cursor-pointer" data-slug="${path}">${path}</span>`;
       });

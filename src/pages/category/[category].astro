@@ -66,7 +66,7 @@ const getImageUrl = (img?: string) => {
       <h1 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight mt-4">
         {categoryName}
       </h1>
-      <p class="text-sm font-mono text-slate-500 mt-2">
+      <p class="text-sm font-mono text-slate-500 dark:text-slate-400 mt-2">
         {posts.length} {posts.length === 1 ? 'Production Playbook' : 'Production Playbooks'} Available
       </p>
     </header>
@@ -75,48 +75,48 @@ const getImageUrl = (img?: string) => {
       {posts.map((post) => {
         const imgSrc = getImageUrl(post.data.coverImage);
         return (
-          <article class="group/card rounded-2xl bg-[#090E1A]/90 border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 flex flex-col justify-between overflow-hidden">
+          <article class="group/card rounded-2xl bg-white dark:bg-[#090E1A]/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-sm dark:shadow-none transition-all duration-300 flex flex-col justify-between overflow-hidden">
             <div>
               {imgSrc && (
-                <div class="w-full h-48 overflow-hidden bg-slate-900 relative border-b border-slate-800">
+                <div class="w-full h-48 overflow-hidden bg-slate-100 dark:bg-slate-900 relative border-b border-slate-200 dark:border-slate-800">
                   <img 
                     src={imgSrc} 
                     alt={post.data.title} 
                     loading="lazy"
                     class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
                   />
-                  <div class="absolute inset-0 bg-gradient-to-t from-[#090E1A] via-transparent to-transparent opacity-60"></div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-[#090E1A] via-transparent to-transparent opacity-60"></div>
                 </div>
               )}
 
               <div class="p-6">
                 <div class="flex items-center justify-between gap-2 mb-4">
-                  <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                     {post.data.category}
                   </span>
-                  <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                     {post.data.badge}
                   </span>
                 </div>
 
-                <h2 class="text-base sm:text-lg font-bold text-white group-hover/card:text-emerald-400 transition-colors leading-snug">
+                <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover/card:text-emerald-600 dark:group-hover/card:text-emerald-400 transition-colors leading-snug">
                   <a href={`/${post.id}/`}>{post.data.title}</a>
                 </h2>
 
-                <p class="text-xs text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-2.5 leading-relaxed line-clamp-3">
                   {post.data.description}
                 </p>
               </div>
             </div>
 
             <div class="p-6 pt-0 mt-2">
-              <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-500 font-mono">
-                <span class="flex items-center gap-1.5 text-slate-400 text-[11px]">
-                  <Clock class="w-3.5 h-3.5 text-slate-400" /> {post.data.readTime}
+              <div class="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono">
+                <span class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px]">
+                  <Clock class="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" /> {post.data.readTime}
                 </span>
                 <a 
                   href={`/${post.id}/`} 
-                  class="group/btn inline-flex items-center gap-1.5 font-bold text-emerald-400 hover:text-emerald-300 transition-all duration-300 transform hover:scale-110 origin-right"
+                  class="group/btn inline-flex items-center gap-1.5 font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 transition-all duration-300 transform hover:scale-110 origin-right"
                 >
                   <span>Read Guide</span> 
                   <ArrowUpRight class="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />

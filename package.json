@@ -26,7 +26,7 @@
     "@astrojs/tailwind": {
       "astro": "$astro"
     }
-  }
+  },
   "allowScripts": {
     "esbuild": true
   },
